@@ -1,16 +1,26 @@
-<!doctype html><html>
-  <head>
-   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMY7X9489X"></script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMY7X9489X"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-NMY7X9489X');
-  </script> <meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+  </script>
 <title>Endless Play</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Instrument+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
-/* Layout: sticky slim bar, left-aligned hero beside a "today's pick" cabinet card, category chips, dense card grid. Games run in a cabinet modal with a fixed 3:4 screen. Single committed dark look. */
+<meta name="description" content="50 free browser games, from Snake and Tetris-style stacking to chess and Blackjack. Nothing to download. Works on desktop and mobile.">
+<meta name="theme-color" content="#0b0e1c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Endless Play">
+<meta property="og:description" content="50 free browser games, from Snake and Tetris-style stacking to chess and Blackjack. Nothing to download. Works on desktop and mobile.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E🎮%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Instrument+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>/* Layout: sticky slim bar, left-aligned hero beside a "today's pick" cabinet card, category chips, dense card grid. Games run in a cabinet modal with a fixed 3:4 screen. Single committed dark look. */
 :root{
   --bg:#0b0e1c; --panel:#131833; --panel2:#1b2346; --line:#262e55;
   --ink:#eef0fb; --mut:#8f98bd; --amber:#ffb52e; --amber-ink:#2a1a00;
@@ -181,11 +191,25 @@ canvas{display:block;border-radius:10px;background:var(--bg)}
   .search{order:3;flex-basis:100%;max-width:none}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
 
+/* multi-page additions */
+html,body{margin:0}
+body{background-color:var(--bg)}
+a.card,a.daily,a.btn,a.logo,.gbar a{text-decoration:none;color:inherit}
+a.daily{display:flex}
+body.gamepage{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+.gbar{display:flex;align-items:center;gap:8px;padding:8px 12px;padding-top:calc(8px + env(safe-area-inset-top,0px));border-bottom:1px solid var(--line);background:var(--panel);flex-wrap:wrap}
+.gbar .back{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:9px;background:var(--panel2);border:1px solid var(--line);font-weight:600;font-size:14px;white-space:nowrap}
+.gbar .back:hover{border-color:#3a4678}
+.gbar .gtitle{font:700 14px var(--f-display);letter-spacing:0;margin:0;flex:1 1 120px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-wrap:nowrap}
+body.gamepage .stage{padding-bottom:env(safe-area-inset-bottom,0px)}
+.nojs{padding:24px;text-align:center;color:var(--mut)}
+</style>
+</head>
+<body>
 <header class="bar"><div class="wrap barin">
-  <div class="logo">ENDLESS<span>PLAY</span></div>
-  <label class="search"><span class="sr">Search games</span><input id="q" type="search" placeholder="Search games" autocomplete="off"></label>
+  <a class="logo" href="index.html">ENDLESS<span>PLAY</span></a>
+  <label class="search"><span class="sr">Search games</span><input id="q" type="search" placeholder="Search 50 games" autocomplete="off"></label>
   <div class="stats"><div class="chip">Points <b id="stPts">0</b></div><div class="chip">Plays <b id="stPlays">0</b></div></div>
 </div></header>
 
@@ -194,33 +218,67 @@ canvas{display:block;border-radius:10px;background:var(--bg)}
     <div>
       <p class="eyebrow">Browser arcade</p>
       <h1>Pick a cabinet.<br>Beat your best.</h1>
-      <p class="lede" id="lede"></p>
+      <p class="lede" id="lede">50 games that run right here in your browser, from reflex tests to a full chess opponent. Nothing to download, and your best scores stay on this device.</p>
       <button class="btn amber" id="rand">Play a random game</button>
     </div>
-    <button class="daily" id="daily" aria-label="Play today's pick"></button>
+    <a class="daily" id="daily" href="game-snake.html" aria-label="Play today's pick"></a>
   </section>
   <nav class="cats" id="cats" aria-label="Categories"></nav>
-  <section class="grid" id="grid" aria-label="Games"></section>
+  <section class="grid" id="grid" aria-label="Games">
+<a class="card" href="game-snake.html" style="--h:150"><span class="tile">🐍</span><span class="meta"><b>Snake</b><small>Arcade · The edges loop around. Eat, grow, do not bite yourself.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-flappy-flight.html" style="--h:48"><span class="tile">🐤</span><span class="meta"><b>Flappy Flight</b><small>Arcade · Tap through the gaps.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-coin-catch.html" style="--h:45"><span class="tile">🪙</span><span class="meta"><b>Coin Catch</b><small>Arcade · Catch coins, dodge bombs.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-brick-breaker.html" style="--h:15"><span class="tile">🧱</span><span class="meta"><b>Brick Breaker</b><small>Arcade · Clear every brick.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-pong-rally.html" style="--h:190"><span class="tile">🏓</span><span class="meta"><b>Pong Rally</b><small>Arcade · Outlast the machine.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-stack-tower.html" style="--h:30"><span class="tile">🏗️</span><span class="meta"><b>Stack Tower</b><small>Arcade · Build it as tall as you can.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-dodge-rain.html" style="--h:210"><span class="tile">☔</span><span class="meta"><b>Dodge Rain</b><small>Action · Stay dry as long as you can.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-star-defender.html" style="--h:260"><span class="tile">🚀</span><span class="meta"><b>Star Defender</b><small>Action · Hold the line against the swarm.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-cube-dash.html" style="--h:25"><span class="tile">🟧</span><span class="meta"><b>Cube Dash</b><small>Action · Jump the spikes.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-road-cross.html" style="--h:120"><span class="tile">🐔</span><span class="meta"><b>Road Cross</b><small>Action · Cross eleven lanes of traffic.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-whack-a-mole.html" style="--h:28"><span class="tile">🐹</span><span class="meta"><b>Whack-a-Mole</b><small>Reflex · Thirty seconds of moles.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-balloon-pop.html" style="--h:350"><span class="tile">🎈</span><span class="meta"><b>Balloon Pop</b><small>Reflex · Pop them before they escape.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-aim-trainer.html" style="--h:0"><span class="tile">🎯</span><span class="meta"><b>Aim Trainer</b><small>Reflex · Hit shrinking targets.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-reaction-test.html" style="--h:55"><span class="tile">⚡</span><span class="meta"><b>Reaction Test</b><small>Reflex · How fast are you, in milliseconds?</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-click-speed.html" style="--h:200"><span class="tile">👆</span><span class="meta"><b>Click Speed</b><small>Reflex · Ten seconds, as many taps as possible.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-perfect-timing.html" style="--h:170"><span class="tile">⏱️</span><span class="meta"><b>Perfect Timing</b><small>Reflex · Stop the marker in the zone.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-memory-match.html" style="--h:280"><span class="tile">🃏</span><span class="meta"><b>Memory Match</b><small>Memory · Find all eight pairs.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-simon-says.html" style="--h:140"><span class="tile">🔊</span><span class="meta"><b>Simon Says</b><small>Memory · Repeat the pattern.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-2048.html" style="--h:38"><span class="tile">🔢</span><span class="meta"><b>2048</b><small>Puzzle · Slide and merge.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-lights-out.html" style="--h:52"><span class="tile">💡</span><span class="meta"><b>Lights Out</b><small>Puzzle · Turn every light off.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-maze-dash.html" style="--h:190"><span class="tile">🌀</span><span class="meta"><b>Maze Dash</b><small>Puzzle · Solve as many mazes as you can in 75 seconds.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-number-rush.html" style="--h:330"><span class="tile">🔟</span><span class="meta"><b>Number Rush</b><small>Puzzle · Tap 1 to 25 in order.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-quick-math.html" style="--h:100"><span class="tile">🧮</span><span class="meta"><b>Quick Math</b><small>Math · Forty-five seconds of mental sums.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-word-scramble.html" style="--h:75"><span class="tile">🔤</span><span class="meta"><b>Word Scramble</b><small>Word · Unscramble as many words as you can.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-typing-sprint.html" style="--h:210"><span class="tile">⌨️</span><span class="meta"><b>Typing Sprint</b><small>Word · Thirty seconds of words.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-penalty-shootout.html" style="--h:130"><span class="tile">⚽</span><span class="meta"><b>Penalty Shootout</b><small>Sports · Five kicks, one keeper.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-chess.html" style="--h:240"><span class="tile">♟️</span><span class="meta"><b>Chess</b><small>Strategy · Play White against the computer.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-block-drop.html" style="--h:265"><span class="tile">🧩</span><span class="meta"><b>Block Drop</b><small>Arcade · Stack falling blocks and clear lines.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-space-invaders.html" style="--h:130"><span class="tile">👾</span><span class="meta"><b>Space Invaders</b><small>Arcade · Shoot down the descending rows.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-sky-jump.html" style="--h:100"><span class="tile">🦘</span><span class="meta"><b>Sky Jump</b><small>Arcade · Bounce up forever.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-copter.html" style="--h:195"><span class="tile">🚁</span><span class="meta"><b>Copter</b><small>Arcade · Thread the cave.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-fruit-slicer.html" style="--h:350"><span class="tile">🍉</span><span class="meta"><b>Fruit Slicer</b><small>Arcade · Slice fruit, skip the bombs.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-lane-runner.html" style="--h:20"><span class="tile">🏃</span><span class="meta"><b>Lane Runner</b><small>Action · Switch lanes, jump, slide.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-highway-racer.html" style="--h:215"><span class="tile">🚗</span><span class="meta"><b>Highway Racer</b><small>Action · Weave through traffic.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-tap-tiles.html" style="--h:285"><span class="tile">🎹</span><span class="meta"><b>Tap Tiles</b><small>Reflex · Tap the gold tile in every row.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-color-clash.html" style="--h:320"><span class="tile">🎨</span><span class="meta"><b>Color Clash</b><small>Reflex · The word lies. Trust the ink.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-odd-one-out.html" style="--h:175"><span class="tile">🔍</span><span class="meta"><b>Odd One Out</b><small>Reflex · Spot the different shade.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-number-memory.html" style="--h:240"><span class="tile">🧠</span><span class="meta"><b>Number Memory</b><small>Memory · How many digits can you hold?</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-square-memory.html" style="--h:305"><span class="tile">🔲</span><span class="meta"><b>Square Memory</b><small>Memory · Remember the lit squares.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-minesweeper.html" style="--h:0"><span class="tile">💣</span><span class="meta"><b>Minesweeper</b><small>Puzzle · Clear the field without a blast.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-slide-puzzle.html" style="--h:225"><span class="tile">🔀</span><span class="meta"><b>Slide Puzzle</b><small>Puzzle · Put the numbers in order.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-color-flood.html" style="--h:200"><span class="tile">🌊</span><span class="meta"><b>Color Flood</b><small>Puzzle · Flood the board in 24 moves.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-code-breaker.html" style="--h:60"><span class="tile">🔐</span><span class="meta"><b>Code Breaker</b><small>Puzzle · Crack the secret color code.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-hangman.html" style="--h:290"><span class="tile">☠️</span><span class="meta"><b>Hangman</b><small>Word · Guess the word before you run out of lives.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-word-guess.html" style="--h:110"><span class="tile">🟩</span><span class="meta"><b>Word Guess</b><small>Word · Six tries to find the five-letter word.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-tic-tac-toe.html" style="--h:340"><span class="tile">❌</span><span class="meta"><b>Tic-Tac-Toe</b><small>Strategy · Beat a computer that learns.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-connect-four.html" style="--h:10"><span class="tile">🔴</span><span class="meta"><b>Connect Four</b><small>Strategy · Four in a row wins.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-blackjack.html" style="--h:150"><span class="tile">♠️</span><span class="meta"><b>Blackjack</b><small>Cards &amp; Dice · Beat the dealer to 21.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-higher-or-lower.html" style="--h:270"><span class="tile">🎴</span><span class="meta"><b>Higher or Lower</b><small>Cards &amp; Dice · Call the next card.</small></span><span class="best">Best<i>—</i></span></a>
+<a class="card" href="game-pig-dice.html" style="--h:45"><span class="tile">🎲</span><span class="meta"><b>Pig Dice</b><small>Cards &amp; Dice · Push your luck against the computer.</small></span><span class="best">Best<i>—</i></span></a>
+  </section>
 </main>
 <footer class="foot"><div class="wrap">Scores and points are saved in this browser only. Every game works with a keyboard, a mouse or a touchscreen.</div></footer>
-
-<div class="modal" id="modal" hidden>
-  <div class="cab" role="dialog" aria-modal="true" aria-labelledby="mTitle">
-    <div class="cabhead">
-      <h2 id="mTitle"></h2>
-      <span class="chip" id="hi" hidden></span>
-      <span class="chip">Score <b id="hs">0</b></span>
-      <span class="chip">Best <b id="hb">0</b></span>
-      <button class="ib" id="pauseBtn" hidden aria-label="Pause">❚❚</button>
-      <button class="ib" id="sndBtn" aria-label="Toggle sound">♪</button>
-      <button class="ib" id="closeBtn" aria-label="Close game">✕</button>
-    </div>
-    <div class="stage" id="stage"><div class="ov" id="ov" hidden></div></div>
-  </div>
-</div>
-
-<script>
-"use strict";
+<script>"use strict";
 /* ---------- helpers ---------- */
 const $=(s,r=document)=>r.querySelector(s);
 const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
@@ -279,9 +337,9 @@ function makeCtx(def){
   g.loop=fn=>{g.pausable=true;$('#pauseBtn').hidden=false;let last=performance.now();
     const tick=t=>{if(g.dead)return;const dt=Math.min(.05,(t-last)/1000);last=t;if(!g.paused)fn(dt,t);g._raf=requestAnimationFrame(tick)};
     g._raf=requestAnimationFrame(tick)};
-  g.canvas=()=>{const c=document.createElement('canvas'),x=c.getContext('2d'),dpr=Math.min(window.devicePixelRatio||1,2);
-    c.width=480*dpr;c.height=640*dpr;x.setTransform(dpr,0,0,dpr,0,0);g.stage.appendChild(c);
-    const fit=()=>{const w=g.stage.clientWidth-16,h=g.stage.clientHeight-16,s=Math.max(.1,Math.min(w/480,h/640));c.style.width=(480*s)+'px';c.style.height=(640*s)+'px'};
+  g.canvas=()=>{const c=document.createElement('canvas'),x=c.getContext('2d');g.stage.appendChild(c);
+    const fit=()=>{const w=g.stage.clientWidth-16,h=g.stage.clientHeight-16,s=Math.max(.1,Math.min(1.9,w/480,h/640));c.style.width=(480*s)+'px';c.style.height=(640*s)+'px';
+      const q=Math.min(3,Math.max(1,(window.devicePixelRatio||1)*s)),pw=Math.round(480*q);if(c.width!==pw){c.width=pw;c.height=Math.round(640*q);x.setTransform(q,0,0,q,0,0)}};
     fit();if(window.ResizeObserver){const ro=new ResizeObserver(fit);ro.observe(g.stage);g._off.push(()=>ro.disconnect())}
     c.style.touchAction='none';
     const pt=e=>{const r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*480/r.width,y:(e.clientY-r.top)*640/r.height}};
@@ -296,7 +354,6 @@ function showOv(html){const o=$('#ov');o.innerHTML=html;o.hidden=false;return o}
 function play(def){
   if(G){teardown(G);G.dead=true}
   clearStage();
-  $('#modal').hidden=false;document.body.classList.add('lock');
   $('#mTitle').textContent=def.icon+'  '+def.name;
   $('#hs').textContent='0';$('#hb').textContent=best[def.id]||0;$('#hi').hidden=true;$('#pauseBtn').hidden=true;
   G=makeCtx(def);const g=G;
@@ -308,22 +365,39 @@ function play(def){
   g.on(document,'keyup',e=>{g.keys[e.key.toLowerCase()]=false});
   g.on(window,'blur',()=>{g.keys={}});
   const o=showOv(`<div class="ovin"><div class="tile" style="--h:${def.hue}">${def.icon}</div><h3>${esc(def.name)}</h3><p>${esc(def.desc)}</p><p class="help">${esc(def.help)}</p><button class="btn amber" id="goBtn">Start</button><small>Best ${best[def.id]||'—'}</small></div>`);
-  const go=$('#goBtn',o);go.onclick=()=>{o.hidden=true;try{def.run(g)}catch(err){console.error(err);g.end(0,'This game hit a bug')}};arm(o,450);
+  const go=$('#goBtn',o);go.onclick=()=>{o.hidden=true;ga('game_start',{game_id:def.slug,game_name:def.name});try{def.run(g)}catch(err){console.error(err);g.end(0,'This game hit a bug')}};arm(o,450);
 }
 function finish(g,score,msg){
   if(g.dead)return;g.dead=true;teardown(g);
-  score=Math.max(0,Math.round(score));g.score(score);plays++;store.set('ep.plays',plays);
+  score=Math.max(0,Math.round(score));g.score(score);plays++;store.set('ep.plays',plays);ga('game_over',{game_id:g.def.slug,score:score});
   const prev=best[g.def.id]||0,nb=score>prev;
   if(nb){best[g.def.id]=score;store.set('ep.best',best);$('#hb').textContent=score}
   refreshStats();refreshCards();$('#pauseBtn').hidden=true;g.info('');
-  const o=showOv(`<div class="ovin"><p class="eyebrow">${esc(msg||'Game over')}</p><div class="final">${score}</div><p>${nb&&score>0?'New best!':'Best '+(best[g.def.id]||0)}</p><div class="acts"><button class="btn amber" id="againBtn">Play again</button><button class="btn" id="otherBtn">Random game</button></div></div>`);
-  $('#againBtn',o).onclick=()=>play(g.def);$('#otherBtn',o).onclick=()=>play(pickRandom(g.def));arm(o,800);
+  const o=showOv(`<div class="ovin"><p class="eyebrow">${esc(msg||'Game over')}</p><div class="final">${score}</div><p>${nb&&score>0?'New best!':'Best '+(best[g.def.id]||0)}</p><div class="acts"><button class="btn amber" id="againBtn">Play again</button><button class="btn" id="otherBtn">Random game</button><a class="btn" href="${HOME()}">All games</a></div></div>`);
+  $('#againBtn',o).onclick=()=>play(g.def);$('#otherBtn',o).onclick=()=>{location.href=gameHref(pickRandom(g.def))};arm(o,800);
 }
 function togglePause(){const g=G;if(!g||g.dead||!g.pausable)return;g.paused=!g.paused;
   if(g.paused){const o=showOv(`<div class="ovin"><h3>Paused</h3><button class="btn amber" id="resBtn">Resume</button></div>`);$('#resBtn',o).onclick=togglePause;$('#resBtn',o).focus()}else $('#ov').hidden=true}
-function closeGame(){if(G){teardown(G);G.dead=true}G=null;clearStage();$('#ov').hidden=true;$('#modal').hidden=true;document.body.classList.remove('lock');refreshCards()}
+function closeGame(){location.href=HOME()}
 function pickRandom(not){const pool=GAMES.filter(x=>(activeCat==='All'||x.cat===activeCat)&&x!==not);const p=pool.length?pool:GAMES.filter(x=>x!==not);return p[rnd(0,p.length-1)]}
 
+
+/* ---------- page helpers (shared by the home page and the game pages) ---------- */
+const IN_GAME=()=>!!document.getElementById('stage');
+const HOME=()=>'index.html';
+const gameHref=d=>'game-'+d.slug+'.html';
+const ga=(n,p)=>{try{if(window.gtag)window.gtag('event',n,p)}catch(e){}};
+function refreshStats(){const a=document.getElementById('stPts'),b=document.getElementById('stPlays');
+  if(a)a.textContent=Object.values(best).reduce((t,v)=>t+(+v||0),0).toLocaleString();if(b)b.textContent=plays}
+function refreshCards(){}
+function boot(slug){const def=GAMES.find(x=>x.slug===slug);if(!def){location.replace(HOME());return}
+  const sb=$('#sndBtn'),upd=()=>sb.classList.toggle('off',!sound);upd();
+  sb.onclick=()=>{sound=!sound;store.set('ep.sound',sound);upd()};
+  $('#pauseBtn').onclick=togglePause;
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&G&&G.pausable&&!G.dead&&!G.paused)togglePause()});
+  play(def)}
+
+"use strict";
 /* ---------- ARCADE games (canvas) ---------- */
 function snake(g){const{x,W,H,c}=g.canvas();const cols=20,rows=26,S=24,oy=8;
   let body=[{x:10,y:13},{x:9,y:13},{x:8,y:13}],dir={x:1,y:0},q=[],food,sc=0,acc=0,step=.13,pulse=null;
@@ -1279,34 +1353,23 @@ const GAMES_DEF=[
  ['hilo','Higher or Lower','Cards & Dice','🎴',270,'Call the next card.','Tap Higher or Lower, or use the Up and Down keys. Three wrong calls end the run.',hilo],
  ['pigdice','Pig Dice','Cards & Dice','🎲',45,'Push your luck against the computer.','Roll to build your turn total. Roll a 1 and you lose it. Hold to bank it. First to 100 wins.',pigdice]
 ];
-GAMES=GAMES_DEF.map(([id,name,cat,icon,hue,desc,help,run])=>({id,name,cat,icon,hue,desc,help,run}));
+GAMES=GAMES_DEF.map(([id,name,cat,icon,hue,desc,help,run])=>({id,name,cat,icon,hue,desc,help,run,slug:name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}));
 
-/* ---------- page UI ---------- */
+</script>
+
+<script>
 const CATS=['All',...[...new Set(GAMES.map(x=>x.cat))]];
-function refreshStats(){$('#stPts').textContent=Object.values(best).reduce((a,b)=>a+(+b||0),0).toLocaleString();$('#stPlays').textContent=plays}
-function card(x){return`<button class="card" data-id="${x.id}" style="--h:${x.hue}"><span class="tile">${x.icon}</span><span class="meta"><b>${esc(x.name)}</b><small>${esc(x.cat)} · ${esc(x.desc)}</small></span><span class="best">Best<i>${best[x.id]||'—'}</i></span></button>`}
-function refreshCards(){renderGrid();renderDaily()}
+function card(x){return`<a class="card" href="${gameHref(x)}" style="--h:${x.hue}"><span class="tile">${x.icon}</span><span class="meta"><b>${esc(x.name)}</b><small>${esc(x.cat)} · ${esc(x.desc)}</small></span><span class="best">Best<i>${best[x.id]||'—'}</i></span></a>`}
 function renderGrid(){const q=$('#q').value.trim().toLowerCase();const list=GAMES.filter(x=>(activeCat==='All'||x.cat===activeCat)&&(!q||(x.name+' '+x.cat+' '+x.desc).toLowerCase().includes(q)));
   $('#grid').innerHTML=list.length?list.map(card).join(''):'<p class="empty">No games match that search.</p>'}
 function renderCats(){$('#cats').innerHTML=CATS.map(c=>`<button class="cat ${c===activeCat?'on':''}" data-c="${c}">${c}${c==='All'?' ('+GAMES.length+')':''}</button>`).join('')}
 function dailyGame(){return GAMES[Math.floor(Date.now()/864e5)%GAMES.length]}
-function renderDaily(){const x=dailyGame();$('#daily').innerHTML=`<span class="tile" style="--h:${x.hue}">${x.icon}</span><span><small>Today's pick</small><h2>${esc(x.name)}</h2><small>${esc(x.desc)} · Best ${best[x.id]||'—'}</small></span>`;$('#daily').onclick=()=>{if($('#modal').hidden)play(x)}}
-$('#lede').textContent=GAMES.length+' games that run right here in your browser, from reflex tests to a full chess opponent. Nothing to download, and your best scores stay on this device.';
-$('#q').placeholder='Search '+GAMES.length+' games';
-$('#grid').addEventListener('click',e=>{if(!$('#modal').hidden)return;const b=e.target.closest('[data-id]');if(b)play(GAMES.find(x=>x.id===b.dataset.id))});
+function renderDaily(){const x=dailyGame(),a=$('#daily');a.href=gameHref(x);a.innerHTML=`<span class="tile" style="--h:${x.hue}">${x.icon}</span><span><small>Today's pick</small><h2>${esc(x.name)}</h2><small>${esc(x.desc)} · Best ${best[x.id]||'—'}</small></span>`}
 $('#cats').addEventListener('click',e=>{const b=e.target.closest('[data-c]');if(!b)return;activeCat=b.dataset.c;renderCats();renderGrid()});
 $('#q').addEventListener('input',renderGrid);
-$('#rand').onclick=()=>{if($('#modal').hidden)play(pickRandom())};
-$('#closeBtn').onclick=closeGame;$('#pauseBtn').onclick=togglePause;
-const snd=()=>$('#sndBtn').classList.toggle('off',!sound);snd();
-$('#sndBtn').onclick=()=>{sound=!sound;store.set('ep.sound',sound);snd()};
-$('#modal').addEventListener('pointerdown',e=>{if(e.target.id==='modal')closeGame()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#modal').hidden)closeGame()});
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&G&&G.pausable&&!G.dead&&!G.paused)togglePause()});
+$('#rand').onclick=()=>{location.href=gameHref(pickRandom())};
+window.addEventListener('pageshow',()=>{refreshStats();renderGrid();renderDaily()});
 renderCats();renderGrid();renderDaily();refreshStats();
 </script>
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-</body></html>
+</body>
+</html>
